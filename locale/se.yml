@@ -157,3 +157,4 @@ se:
   'uptime: %02d:%02d:%02d': 'upptid: %02d:%02d:%02d'
   "%s (%0.1f GB)\nUsed: %d MB (%d%%)": ~
   "Heap: %d (%d%%)\nLVGL: %d (%d%%)": ~
+  
