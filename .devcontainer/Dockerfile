@@ -16,6 +16,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install "/tmp/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb" --no-install-recommends -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && rm -f "/tmp/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb"
 
+
+COPY input/menu /home/vscode/.fluxbox/menu
+COPY input/apps /home/vscode/.fluxbox/apps
+
 USER vscode
 
 HEALTHCHECK NONE

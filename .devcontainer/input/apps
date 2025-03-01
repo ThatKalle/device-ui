@@ -1,0 +1,11 @@
+[transient] (role=GtkFileChooserDialog)
+  [Dimensions]	{50% 50%}
+  [Position]	(CENTER)	{0 0}
+[end]
+[app] (role=GtkFileChooserDialog)
+  [Dimensions]	{50% 50%}
+  [Position]	(CENTER)	{0 0}
+[end]
+[app] (name=eezstudio) (class=eezstudio)
+  [Maximized]   {yes}
+[end]
