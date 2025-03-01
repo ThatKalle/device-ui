@@ -1,3 +1,5 @@
+# trunk-ignore-all(terrascan/AC_DOCKER_0002): Known terrascan issue
+# trunk-ignore-all(hadolint/DL3008): Do not pin apt package versions
 FROM mcr.microsoft.com/devcontainers/cpp:1-debian-12
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
