@@ -1,6 +1,6 @@
 [begin] (  Application Menu  )
     [submenu] (Applications)
-        [exec] (EEZ Studio) { eezstudio } <>
+        [exec] (EEZ Studio) { dbus-launch --exit-with-session eezstudio } <>
     [end]
     Separator
     [exec] (File Manager) { nautilus ~ } <>
