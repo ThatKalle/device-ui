@@ -4,6 +4,14 @@
     "dockerfile": "Dockerfile"
   },
 
+  // Adding GPUs to the container requires host machine software
+  // AMD: AMD ROCm™ Software
+  // NVIDIA: NVIDIA Container Toolkit
+  // "hostRequirements": {
+  //   "gpu": true
+  // },
+  // "runArgs": ["--gpus=all"],
+
   "features": {
     "ghcr.io/trunk-io/devcontainer-feature/trunk:1": {},
     "ghcr.io/devcontainers/features/node:1": {},
