@@ -10,6 +10,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
     ca-certificates \
     git \
+    gpg \
     wget \
     zip \
     && wget "https://github.com/eez-open/studio/releases/download/v${EEZ_STUDIO_VERSION}/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb" -P "/tmp" -q \
