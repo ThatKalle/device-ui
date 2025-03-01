@@ -43,5 +43,5 @@
     }
   },
 
-  "postCreateCommand": "npm install lv_i18n -g --no-fund"
+  "postCreateCommand": "sudo chown -R vscode /workspaces && npm install lv_i18n -g --no-fund"
 }
