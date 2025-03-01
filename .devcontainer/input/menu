@@ -5,7 +5,7 @@
     Separator
     [exec] (File Manager) { nautilus ~ } <>
     [exec] (Text Editor) { mousepad } <>
-    [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il && bash } <>
+    [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
     [exec] (Web Browser) { x-www-browser --disable-dev-shm-usage } <>
     [submenu] (System) {}
         [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
