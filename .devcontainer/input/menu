@@ -2,7 +2,7 @@
     [submenu] (Applications)
         [exec] (EEZ Studio) { dbus-launch --exit-with-session eezstudio } <>
     [end]
-    Separator
+    [separator]
     [exec] (File Manager) { nautilus ~ } <>
     [exec] (Text Editor) { mousepad } <>
     [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
