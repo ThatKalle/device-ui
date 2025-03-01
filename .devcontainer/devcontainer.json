@@ -15,7 +15,7 @@
   "features": {
     "ghcr.io/trunk-io/devcontainer-feature/trunk:1": {},
     "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers/features/desktop-lite:1": {}
+    "ghcr.io/devcontainers/features/desktop-lite:1": {} // Fluxbox
   },
 
   "forwardPorts": [5901, 6080],
@@ -51,5 +51,5 @@
     }
   },
 
-  "postCreateCommand": "sudo chown -R vscode /workspaces && npm install lv_i18n -g --no-fund --no-update-notifier"
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
 }
