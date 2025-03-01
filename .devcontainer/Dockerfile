@@ -2,6 +2,8 @@
 # trunk-ignore-all(hadolint/DL3008): Do not pin apt package versions
 FROM mcr.microsoft.com/devcontainers/cpp:1-debian-12
 
+ENV EEZ_STUDIO_VERSION=0.22.0
+
 USER root
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -10,7 +12,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     git \
     wget \
     zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && wget "https://github.com/eez-open/studio/releases/download/v${EEZ_STUDIO_VERSION}/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb" -P "/tmp" -q \
+    && apt-get install "/tmp/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb" --no-install-recommends -y \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* && rm -f "/tmp/eezstudio_${EEZ_STUDIO_VERSION}_amd64.deb"
 
 USER vscode
 
