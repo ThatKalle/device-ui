@@ -71,14 +71,14 @@ se:
   Restore: Återställ
   Public/Private Key: Publik/Privat nyckel
   "NodeDB Reset\nFactory Reset\nClear Chat History": "Nollställ NodeDB\nFabriksåterställning\nRensa Chatthistorik"
-  Channel Name: Kanal Namn
+  Channel Name: Kanalnamn
   Pre-shared Key: Tidigare delad Nyckel
   Filter: ~
   Unknown: Okänd
   Offline: Frånkopplad
   Public Key: Publik Nyckel
   Channel: Kanal
-  Hops away: Hopp bort
+  Hops away: Antal hopp
   MQTT: ~
   Position: Position
   Name: Namn
@@ -157,4 +157,3 @@ se:
   'uptime: %02d:%02d:%02d': 'upptid: %02d:%02d:%02d'
   "%s (%0.1f GB)\nUsed: %d MB (%d%%)": ~
   "Heap: %d (%d%%)\nLVGL: %d (%d%%)": ~
-  
