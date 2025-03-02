@@ -490,6 +490,11 @@ void TFTView_320x240::enterProgrammingMode(void)
         lv_label_set_text(objects.meshtastic_url, _("Rebooting ..."));
 
         if (ownNode) {
+            meshtastic_Config_NetworkConfig &network = THIS->db.config.network;
+            if (network.wifi_enabled) {
+                network.wifi_enabled = false;
+                THIS->controller->sendConfig(meshtastic_Config_NetworkConfig{network});
+            }
             meshtastic_Config_BluetoothConfig &bluetooth = THIS->db.config.bluetooth;
             bluetooth.mode = meshtastic_Config_BluetoothConfig_PairingMode_FIXED_PIN;
             bluetooth.fixed_pin = random(100000, 999999);
@@ -1852,6 +1857,11 @@ void TFTView_320x240::ui_event_device_reboot_button(lv_event_t *e)
 
 void TFTView_320x240::ui_event_device_progmode_button(lv_event_t *e)
 {
+    meshtastic_Config_NetworkConfig &network = THIS->db.config.network;
+    if (network.wifi_enabled) {
+        network.wifi_enabled = false;
+        THIS->controller->sendConfig(meshtastic_Config_NetworkConfig{network});
+    }
     meshtastic_Config_BluetoothConfig &bluetooth = THIS->db.config.bluetooth;
     bluetooth.enabled = true;
     THIS->controller->sendConfig(meshtastic_Config_BluetoothConfig{bluetooth}, THIS->ownNode);
@@ -4088,7 +4098,7 @@ void TFTView_320x240::handleAddMessage(char *msg)
 
     if (channelOrNode < c_max_channels) {
         ch = (uint8_t)channelOrNode;
-        requestId = requests.addRequest(ch, ResponseHandler::TextMessageRequest, nullptr, callback);
+        requestId = requests.addRequest(ch, ResponseHandler::TextMessageRequest, (void *)ch, callback);
     } else {
         ch = (uint8_t)(unsigned long)nodes[channelOrNode]->user_data;
         to = channelOrNode;
@@ -4464,6 +4474,15 @@ void TFTView_320x240::updateNode(uint32_t nodeNum, uint8_t ch, const char *userS
 
 void TFTView_320x240::updatePosition(uint32_t nodeNum, int32_t lat, int32_t lon, int32_t alt, uint32_t sats, uint32_t precision)
 {
+    int32_t altU = abs(alt) < 10000 ? alt : 0;
+    char units[3] = {};
+    if (db.config.display.units == meshtastic_Config_DisplayConfig_DisplayUnits_METRIC) {
+        units[0] = 'm';
+    } else {
+        units[0] = 'f';
+        units[1] = 't';
+        altU = int32_t(float(altU) * 3.28084);
+    }
     if (nodeNum == ownNode) {
         char buf[64];
         int latSeconds = (int)round(lat * 1e-7 * 3600);
@@ -4481,11 +4500,11 @@ void TFTView_320x240::updatePosition(uint32_t nodeNum, int32_t lat, int32_t lon,
         char lonLetter = (lon > 0) ? 'E' : 'W';
 
         if (sats)
-            sprintf(buf, "%c%02i° %2i'%02i\"   %u sats\n%c%02i° %2i'%02i\"   %dm", latLetter, abs(latDegrees), latMinutes,
-                    latSeconds, sats, lonLetter, abs(lonDegrees), lonMinutes, lonSeconds, abs(alt) < 10000 ? alt : 0);
+            sprintf(buf, "%c%02i° %2i'%02i\"   %u sats\n%c%02i° %2i'%02i\"   %d%s", latLetter, abs(latDegrees), latMinutes,
+                    latSeconds, sats, lonLetter, abs(lonDegrees), lonMinutes, lonSeconds, altU, units);
         else
-            sprintf(buf, "%c%02i° %2i'%02i\"\n%c%02i° %2i'%02i\"   %dm", latLetter, abs(latDegrees), latMinutes, latSeconds,
-                    lonLetter, abs(lonDegrees), lonMinutes, lonSeconds, abs(alt) < 10000 ? alt : 0);
+            sprintf(buf, "%c%02i° %2i'%02i\"\n%c%02i° %2i'%02i\"   %d%s", latLetter, abs(latDegrees), latMinutes, latSeconds,
+                    lonLetter, abs(lonDegrees), lonMinutes, lonSeconds, altU, units);
 
         lv_label_set_text(objects.home_location_label, buf);
 
@@ -4524,8 +4543,8 @@ void TFTView_320x240::updatePosition(uint32_t nodeNum, int32_t lat, int32_t lon,
         lv_obj_t *panel = nodes[nodeNum];
         lv_label_set_text(panel->LV_OBJ_IDX(node_pos1_idx), buf);
         if (sats)
-            sprintf(buf, "%dm MSL  %u sats", abs(alt) < 10000 ? alt : 0, sats);
-        sprintf(buf, "%dm MSL", abs(alt) < 10000 ? alt : 0);
+            sprintf(buf, "%d%s MSL  %u sats", altU, units, sats);
+        sprintf(buf, "%d%s MSL", altU, units);
         lv_label_set_text(panel->LV_OBJ_IDX(node_pos2_idx), buf);
         // store lat/lon in user_data, because we need these values later to calculate the distance to us
         panel->LV_OBJ_IDX(node_pos1_idx)->user_data = (void *)lat;
@@ -4551,10 +4570,16 @@ void TFTView_320x240::updateDistance(uint32_t nodeNum, int32_t lat, int32_t lon)
     buf[3] = userData[3];
     buf[4] = '\n';
 
-    if (dist > 1.0) {
-        sprintf(&buf[5], "%.1f km ", dist);
+    if (db.config.display.units == meshtastic_Config_DisplayConfig_DisplayUnits_METRIC) {
+        if (dist > 1.0)
+            sprintf(&buf[5], "%.1f km ", dist);
+        else
+            sprintf(&buf[5], "%d m ", (uint32_t)round(dist * 1000));
     } else {
-        sprintf(&buf[5], "%d m ", (uint32_t)round(dist * 1000));
+        if (dist > 0.1)
+            sprintf(&buf[5], "%.1f mi ", round(dist * 0.621371));
+        else
+            sprintf(&buf[5], "%d ft ", uint32_t(dist * 3280.84));
     }
     // we used the userShort label to add the distance, so re-arrange a bit the position
     lv_obj_t *userShort = nodes[nodeNum]->LV_OBJ_IDX(node_lbs_idx);
