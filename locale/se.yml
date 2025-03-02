@@ -49,23 +49,12 @@ se:
   Primary Channel: Primär Kanal
   <unset>: <ej inställt>
   Secondary Channels: Sekundär Kanal
-  "LONG FAST\nLONG SLOW\n-- deprecated --\nMEDIUM SLOW\nMEDIUM FAST\nSHORT SLOW\nSHORT FAST\nLONG MODERATE\nSHORT TURBO": |-
-    Lång räckvidd / Snabb
-    Lång räckvidd / Långsam
-    -- utfasad --
-    Medium räckvidd / Långsam
-    Medium räckvidd / Snabb
-    Kort räckvidd / Långsam
-    Kort räckvidd / Snabb
-    Lång räckvidd / Måttlig
-    Kort räckvidd / Turbo
-  "Client\nClient Mute\nRouter\nRepeater\nTracker\nSensor\nTAK\nClient Hidden\nLost & Found\nTAK Tracker": ~
+  "LONG FAST\nLONG SLOW\n-- deprecated --\nMEDIUM SLOW\nMEDIUM FAST\nSHORT SLOW\nSHORT FAST\nLONG MODERATE\nSHORT TURBO": "Lång räckvidd / Snabb\nLång räckvidd / Långsam\n-- utfasad --\nMedium räckvidd / Långsam\nMedium räckvidd / Snabb\nKort räckvidd / Långsam\nKort räckvidd / Snabb\nLång räckvidd / Måttlig\nKort räckvidd / Turbo"
+  "Client\nClient Mute\nRouter\nRepeater\nTracker\nSensor\nTAK\nClient Hidden\nLost & Found\nTAK Tracker": "Klient\nKlient Stum\nRouter\nRelästation\nSpårare\nSensor\nTAK\nKlient Gömd\nFörlorad & Hittad\nTAK Spårare"
   WiFi SSID: ~
   WiFi pre-shared Key: WiFi Lösenord
   'Brightness: 60%': 'Ljusstyrka: 60%'
-  "Dark\nLight": |-
-    Mörkt
-    Ljust
+  "Dark\nLight": "Mörkt\nLjust"
   'Timeout: 60s': ~
   Screen Lock: Bildskärms Lås
   Settings Lock: Inställningslås
@@ -81,13 +70,10 @@ se:
   Backup: Säkerhetskopiera
   Restore: Återställ
   Public/Private Key: Publik/Privat nyckel
-  "NodeDB Reset\nFactory Reset\nClear Chat History": |-
-    Nollställ NodeDB
-    Fabriksåterställning
-    Rensa Chatthistorik
+  "NodeDB Reset\nFactory Reset\nClear Chat History": "Nollställ NodeDB\nFabriksåterställning\nRensa Chatthistorik"
   Channel Name: Kanalnamn
   Pre-shared Key: Tidigare delad Nyckel
-  Filter: Filter
+  Filter: ~
   Unknown: Okänd
   Offline: Frånkopplad
   Public Key: Publik Nyckel
@@ -101,12 +87,9 @@ se:
   Telemetry: Telemetri
   IAQ: ~
   Start: Kör
-  "choose\nnode": |-
-    välj
-    nod
+  "choose\nnode": "välj\nnod"
   choose target node: välj mål nod
-  "New Message from\n": |-
-    Nytt meddelande från
+  "New Message from\n": "Nytt meddelande från\n"
   Restoring messages ...: Återställer meddelanden ...
   Please set region and name: Ange region och namn
   Region: ~
@@ -120,7 +103,7 @@ se:
   'Screen Calibration: %s': 'Bildskärmens Kalibrering: %s'
   done: klar
   default: standard
-  "Client\nClient Mute\nTracker\nSensor\nTAK\nClient Hidden\nLost & Found\nTAK Tracker": ~
+  "Client\nClient Mute\nTracker\nSensor\nTAK\nClient Hidden\nLost & Found\nTAK Tracker": "Klient\nKlient Stum\nSpårare\nSensor\nTAK\nKlient Gömd\nFörlorad & Hittad\nTAK Spårare"
   Rebooting ...: Startar om ...
   '>> Programming mode <<': '>> Programmeringsläge <<'
   Enter Text ...: Text ...
@@ -163,9 +146,7 @@ se:
   '%d active chat(s)':
     one: 1 aktiv chatt
     other: '%d aktiva chattar'
-  "New message from \n%s": |-
-    Nytt meddelande från 
-    %s
+  "New message from \n%s": "Nytt meddelande från \n%s"
   'Input Control: %s/%s': 'Inmatningsmetod: %s/%s'
   '%d of %d nodes online':
     one: 1 nod online
@@ -176,23 +157,3 @@ se:
   'uptime: %02d:%02d:%02d': 'upptid: %02d:%02d:%02d'
   "%s (%0.1f GB)\nUsed: %d MB (%d%%)": ~
   "Heap: %d (%d%%)\nLVGL: %d (%d%%)": ~
-  'Screen Lock: %s': 'Bildskärms Lås: %s'
-  <no name>: <inget namn>
-  Filtering ...: Filtrerar ...
-  Resync...: Synkronisera om...
-  "NodeDB Reset\nFactory Reset": |-
-    Nollställ NodeDB
-    Fabriksåterställning
-  'Screen Lock: off': 'Bildskärms Lås: av'
-  "Client\nClient Mute\nRouter\n-- deprecated --\nRepeater\nTracker\nSensor\nTAK\nClient Hidden\nLost & Found\nTAK Tracker": |-
-    Client
-    Client Mute
-    Router
-    -- utfasad --
-    Repeater
-    Tracker
-    Sensor
-    TAK
-    Client Hidden
-    Lost & Found
-    TAK Tracker
